@@ -10,43 +10,22 @@ public class QuickUnion{
 	}
     }
     
-    public boolean connected(int p, int q){
-	int pParent = id[p];
-	int qParent = id[q];
-	int pRoot = pParent;
-	int qRoot= qParent; 
-	
-	while(pParent != id[pParent]){
-	    pParent = id[pParent];
-	}
-	pRoot = pParent;
-	
-	while(qParent != id[qParent]){
-	    qParent = id[qParent];
-	}	    	    
-	qRoot = qParent;
-        
-        return id[pRoot] == id[qRoot];	
+    public int root(int p){
+    	
+	while(id[p] != p){
+    	    p = id[p];
+    	}
+        return p;
+    }
+    
+    public boolean connected(int p, int q)
+        return root(p) == root(q);	
     }
     
     public void union(int p, int q){
-	int pParent = id[p];
-	int qParent = id[q];
-	int pRoot = pParent;
-        int qRoot= qParent;
-	
-	while(pParent != id[pParent]){
-	    pParent = id[pParent];
-	}
-	
-	pRoot = pParent;
-	
-	while(qParent != id[qParent]){
-	    qParent = id[qParent];
-	}   
-	qRoot = qParent;
-	
-	id[pRoot] = qRoot;
+	int i = root(p);
+	int j = root(q);
+	id[i] = j;
     }
 
     public void printOut(){
